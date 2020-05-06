@@ -92,6 +92,17 @@ def create_drink():
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the updated drink
         or appropriate status code indicating reason for failure
 '''
+@app.route('/drinks/<int:drink_id>', methods=['PATCH'])
+def drink(drink_id):
+    if not drink_id:
+        abort(404)
+
+    drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+    body = request.get_json()
+    drink.title = body.get('title', None)
+    drink.recipe = body.get('recipe', None)
+    drink.insert()
+    return jsonify({"success": True, "drinks": drink.long()})
 
 
 '''
@@ -104,6 +115,14 @@ def create_drink():
     returns status code 200 and json {"success": True, "delete": id} where id is the id of the deleted record
         or appropriate status code indicating reason for failure
 '''
+@app.route('/drinks/<int:drink_id>', methods=['DELETE'])
+def delete_drink(drink_id):
+    if not drink_id:
+        abort(404)
+
+    drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+    drink.delete()
+    return jsonify({"success": True, "delete": drink.id})
 
 
 # Error Handling
@@ -138,11 +157,11 @@ def unprocessable(error):
 
 @app.errorhandler(404)
 def not_found(error):
-        return jsonify({
-            "success": False,
-            "error": 404,
-            "message": "Not found"
-        }), 404
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "Not found"
+    }), 404
 
 
 '''
