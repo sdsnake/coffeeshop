@@ -46,6 +46,15 @@ def get_drinks():
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
+@app.route('/drinks-details/', methods=['GET'])
+def get_drinks_details():
+    all_drinks = Drink.query.all()
+    print(all_drinks)
+    drinks = [drink.long() for drink in all_drinks]
+
+    # if len(drinks) == 0:
+    # abort(404)
+    return jsonify({"success": True, "drinks": drinks})
 
 
 '''
@@ -57,6 +66,19 @@ def get_drinks():
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
         or appropriate status code indicating reason for failure
 '''
+
+
+@app.route('/drinks/', methods=['POST'])
+def create_drink():
+    body = request.get_json()
+    req_title = body.get('title', None)
+    req_recipe = body.get('recipe', None)
+    drink = Drink(title=req_title, recipe=json.dumps(req_recipe))
+    drink.insert()
+    #all_drinks = Drink.query.all()
+    #drinks = [drink.short() for drink in all_drinks]
+
+    return jsonify({"success": True, "drinks": drink.long()})
 
 
 '''
@@ -112,6 +134,15 @@ def unprocessable(error):
 @TODO implement error handler for 404
     error handler should conform to general task above 
 '''
+
+
+@app.errorhandler(404)
+def not_found(error):
+        return jsonify({
+            "success": False,
+            "error": 404,
+            "message": "Not found"
+        }), 404
 
 
 '''
