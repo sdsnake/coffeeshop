@@ -47,6 +47,7 @@ def get_drinks():
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks-details/', methods=['GET'])
+@requires_auth('get:drinks_details')
 def get_drinks_details():
     all_drinks = Drink.query.all()
     print(all_drinks)
@@ -79,7 +80,7 @@ def create_drink(jwt):
     #all_drinks = Drink.query.all()
     #drinks = [drink.short() for drink in all_drinks]
 
-    return jsonify({"success": True, "drinks": drink.long()})
+    return jsonify({"success": True, "drinks": Drink.long(drink)})
 
 
 '''
@@ -94,6 +95,7 @@ def create_drink(jwt):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
+@requires_auth('patch:drinks')
 def drink(drink_id):
     if not drink_id:
         abort(404)
@@ -117,6 +119,7 @@ def drink(drink_id):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks/<int:drink_id>', methods=['DELETE'])
+@requires_auth('delete:drinks')
 def delete_drink(drink_id):
     if not drink_id:
         abort(404)
