@@ -98,7 +98,7 @@ def create_drink(jwt):
 '''
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
 @requires_auth('patch:drinks')
-def drink(drink_id):
+def drink(jwt, drink_id):
     try:
         if not drink_id:
             abort(404)
@@ -106,7 +106,7 @@ def drink(drink_id):
         drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
         body = request.get_json()
         drink.title = body.get('title', None)
-        drink.recipe = body.get('recipe', None)
+        drink.recipe = json.dumps(body.get('recipe', None))
         drink.insert()
         return jsonify({"success": True, "drinks": drink.long()})
     except:
