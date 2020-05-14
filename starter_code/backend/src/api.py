@@ -70,14 +70,14 @@ def get_drinks_detail(jwt):
 '''
 
 
-@app.route('/drinks/', methods=['POST'])
+@app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
 def create_drink(jwt):
     try:
         body = request.get_json()
-        req_title = body.get('title', None)
-        req_recipe = body.get('recipe', None)
-        drink = Drink(title=req_title, recipe=json.dumps(req_recipe))
+        title = body.get('title', None)
+        recipe = body.get('recipe', None)
+        drink = Drink(title=title, recipe=json.dumps(recipe))
         drink.insert()
 
         return jsonify({"success": True, "drinks": Drink.long(drink)})
