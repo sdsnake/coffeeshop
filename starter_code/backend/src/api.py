@@ -108,7 +108,7 @@ def drink(jwt, drink_id):
         drink.title = body.get('title', None)
         drink.recipe = json.dumps(body.get('recipe', None))
         drink.insert()
-        return jsonify({"success": True, "drinks": drink.long()})
+        return jsonify({"success": True, "drinks": [drink.long()]})
     except:
         abort(422)
 
