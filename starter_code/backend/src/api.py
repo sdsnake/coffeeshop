@@ -20,7 +20,7 @@ db_drop_and_create_all()
 
 # ROUTES
 '''
-@TODO implement endpoint
+    endpoint
     GET /drinks
         it should be a public endpoint
         it should contain only the drink.short() data representation
@@ -40,7 +40,7 @@ def get_drinks():
 
 
 '''
-@TODO implement endpoint
+    endpoint
     GET /drinks-detail
         it should require the 'get:drinks-detail' permission
         it should contain the drink.long() data representation
@@ -60,7 +60,7 @@ def get_drinks_detail(jwt):
 
 
 '''
-@TODO implement endpoint
+    endpoint
     POST /drinks
         it should create a new row in the drinks table
         it should require the 'post:drinks' permission
@@ -86,7 +86,7 @@ def create_drink(jwt):
 
 
 '''
-@TODO implement endpoint
+    endpoint
     PATCH /drinks/<id>
         where <id> is the existing model id
         it should respond with a 404 error if <id> is not found
@@ -114,7 +114,7 @@ def drink(jwt, drink_id):
 
 
 '''
-@TODO implement endpoint
+    endpoint
     DELETE /drinks/<id>
         where <id> is the existing model id
         it should respond with a 404 error if <id> is not found
@@ -139,7 +139,7 @@ def delete_drink(jwt, drink_id):
 
 # Error Handling
 '''
-Example error handling for unprocessable entity
+ error handling for unprocessable entity
 '''
 @app.errorhandler(422)
 def unprocessable(error):
@@ -151,7 +151,7 @@ def unprocessable(error):
 
 
 '''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
+    implement error handlers using the @app.errorhandler(error) decorator
     each error handler should return (with approprate messages):
              jsonify({
                     "success": False, 
@@ -162,7 +162,7 @@ def unprocessable(error):
 '''
 
 '''
-@TODO implement error handler for 404
+    implement error handler for 404
     error handler should conform to general task above 
 '''
 
@@ -177,7 +177,7 @@ def not_found(error):
 
 
 '''
-@TODO implement error handler for AuthError
+    error handler for AuthError
     error handler should conform to general task above 
 '''
 
