@@ -5,4 +5,4 @@ Cette application permet de réaliser des recettes de café et les enregistrer a
 Le projet a été réalisé durant ma formation au parcours du diplôme nanodegree Udacity.
 Le front était déja présent, j'ai complété la partie backend.
 
-Plus de détails dans le readme des différents dossiers.=> dossier "starter_code", "front end" et "backend".
+Plus de détails dans le readme des différents dossiers.=> dossiers "starter_code", "front end" et "backend".
