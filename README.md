@@ -1,7 +1,7 @@
-# coffeeshop
+# Coffeeshop
 Cette application permet de réaliser des recettes de café et les enregistrer afin de les réutiliser facilement. L'application a été réalisée sous Flask.
 
-# infos:
+# Infos:
 Le projet a été réalisé durant ma formation au parcours du diplôme nanodegree Udacity.
 Le front était déja présent, j'ai complété la partie backend.
 
